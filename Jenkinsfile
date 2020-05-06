@@ -13,7 +13,9 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh 'set -x & npm run start & sleep 1 & echo $! > .pidfile & set +x'
+                sh 'set -x & npm run start'
+                sh 'echo $! > .pidfile & set +x'
+                sh "echo 'Visit http://localhost:3000'"
             }
         }
     }
