@@ -13,9 +13,9 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh 'set -x & npm run start'
-                sh 'echo $! > .pidfile & set +x'
-                sh "echo 'Visit http://localhost:3000'"
+                sh './jenkins/scripts/deliver.sh'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh './jenkins/scripts/kill.sh'
             }
         }
     }
