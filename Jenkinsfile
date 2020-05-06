@@ -9,7 +9,13 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'npm install'
-                sh 'npm run start'
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh 'npm run start & sleep 1'
+                sh 'echo $! > .pidfile'
+                sh 'kill $(cat .pidfile)'
             }
         }
     }
