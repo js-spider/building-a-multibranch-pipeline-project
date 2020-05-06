@@ -13,9 +13,8 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh 'npm run start & sleep 1'
-                sh 'echo $! > .pidfile'
-                sh 'kill $(cat .pidfile)'
+                sh 'set -x & npm run start & sleep 1 & echo $! > .pidfile & set +x'
+                sh 'set -x & kill $(cat .pidfile)'
             }
         }
     }
