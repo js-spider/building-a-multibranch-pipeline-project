@@ -13,11 +13,10 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh 'set -x &
-                    npm start &
-                    sleep 1 &
-                    echo $! > .pidfile &
-                    set +x'
+                sh 'set -x'
+                sh 'npm start & sleep 1'
+                sh 'echo $! > .pidfile'
+                sh 'set +x'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh './jenkins/scripts/kill.sh'
             }
